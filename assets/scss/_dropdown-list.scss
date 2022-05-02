@@ -1,0 +1,127 @@
+// стили выпадающего списка
+.error {
+  .v-select {
+    .vs__dropdown-toggle {
+      border-color: indianred;
+      background-color:  #fffafa;
+      animation: shake linear 0.3s;
+    }
+  }
+}
+.v-select {
+  width: 100%;
+  //background: white;
+
+  :hover {
+    outline: none;
+  }
+
+  &.vs--open {
+    .vs__dropdown-toggle {
+      border-radius: 4px 4px 0 0;
+      border-color: #005590;
+      //background-image: url(~@/assets/img/icons/sort_focus.svg);
+    }
+
+    .vs__open-indicator {
+      fill: #005590;
+      transform: translateY(-3px) rotate(180deg);
+    }
+  }
+
+  &.vs--disabled {
+    opacity: .7;
+  }
+
+  &.no-icon .vs__dropdown-toggle {
+    background-image: none;
+    padding-left: 16px;
+  }
+}
+
+.vs__dropdown-toggle {
+  height: 48px; width: 100%;
+  background-color: white;
+  border: 1px solid #A9A9A9;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 0 16px;
+  position: relative;
+  cursor: pointer;
+  //background: white url(~@/assets/img/icons/sort.svg) no-repeat left 16px center/24px;
+  overflow: hidden;
+
+  .vs__actions {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50px;
+  }
+
+  .vs__open-indicator {
+    height: 11px;
+    position: absolute;
+    right: 15px;
+    top: 19px;
+    fill: #A9A9A9;
+    transition: all .1s linear;
+  }
+
+  .vs__clear {
+    display: none;
+  }
+
+  input {
+    height: 46px; width: 100%;
+    border: 0;
+    background: transparent;
+    outline: none;
+    cursor: inherit;
+    pointer-events: none;
+  }
+}
+
+.vs__dropdown-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 47px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
+  z-index: 999;
+
+  background: white;
+  border: 1px solid #005590;
+  border-radius: 0 0 4px 4px;
+  width: 100%;
+  max-height: 250px;
+
+  li {
+    line-height: 48px;
+    padding: 0 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+  }
+}
+
+.vs--open {
+  .vs__selected {
+    display: none;
+  }
+}
+
+.vs__selected {
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  font-weight: 400;
+  height: 46px;
+  line-height: 46px;
+  position: absolute;
+  white-space: nowrap;
+}
