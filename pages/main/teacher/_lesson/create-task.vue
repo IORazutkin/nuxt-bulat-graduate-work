@@ -50,11 +50,7 @@ import { User } from '~/types/user'
 export default class extends Vue {
   lesson!: Lesson
   studentList!: Record<string, User[]>
-  formData: any = {
-    title: '',
-    students: [],
-    lesson: this.lesson
-  }
+  formData!: any
 
   async asyncData (context: Context) {
     const lessonId = context.params.lesson
@@ -63,7 +59,12 @@ export default class extends Vue {
 
     return {
       lesson,
-      studentList
+      studentList,
+      formData: {
+        title: '',
+        students: [],
+        lesson
+      }
     }
   }
 
@@ -85,6 +86,12 @@ export default class extends Vue {
   }
 
   createTask () {
+    this.$v.$touch()
+
+    if (this.$v.$error) {
+      return
+    }
+
     this.$axios.$post('/api/task', this.formData).then(() => {
       this.$router.push('/main/teacher/' + this.lesson.id)
     })

@@ -86,6 +86,12 @@ export default class extends Vue {
   }
 
   updateTask () {
+    this.$v.$touch()
+
+    if (this.$v.$error) {
+      return
+    }
+
     this.$axios.$patch('/api/task/' + this.task.id, this.formData).then(() => {
       this.$router.push('/main/teacher/' + this.task.lesson.id)
     })
