@@ -2,6 +2,7 @@
   <div class="page">
     <div class="container">
       <div class="page__wrapper">
+        <document-stats-list :list="stats" class="page__block" />
         <document-list :list="documents" class="page__block" />
         <course-list :list="courses" :institute="institute" class="page__block" />
         <deanery-list :list="deaneries" :institute="institute" class="page__block" />
@@ -25,14 +26,16 @@ import StudentList from '~/components/list/StudentList.vue'
 import BreadCrumbs from '~/components/BreadCrumbs.vue'
 import { Document } from '~/types/document'
 import DocumentList from '~/components/list/DocumentList.vue'
+import DocumentStatsList from '~/components/list/DocumentStatsList.vue'
 @Component({
-  components: { DocumentList, BreadCrumbs, StudentList, TeacherList, DeaneryList, CourseList }
+  components: { DocumentStatsList, DocumentList, BreadCrumbs, StudentList, TeacherList, DeaneryList, CourseList }
 })
 export default class extends Vue {
   institute!: Institute
   courses!: Course[]
   deaneries!: User[]
   teachers!: User[]
+  stats!: Record<string, number>
   students!: User[]
   documents!: Document[]
 
@@ -43,6 +46,7 @@ export default class extends Vue {
     const deaneries = await context.$axios.$get('/api/deanery/institute/' + instituteId)
     const teachers = await context.$axios.$get('/api/teacher/institute/' + instituteId)
     const students = await context.$axios.$get('/api/student/institute/' + instituteId)
+    const stats = await context.$axios.$get('/api/document/deanery/stats/' + instituteId)
     const documents = await context.$axios.$get('/api/document/deanery')
 
     return {
@@ -51,6 +55,7 @@ export default class extends Vue {
       deaneries,
       teachers,
       students,
+      stats,
       documents
     }
   }
